@@ -14,6 +14,7 @@
         android:layout_marginStart="8dp"
         android:ems="10"
         android:hint="0"
+        android:enabled="false"
         android:inputType="number"
         android:paddingRight="40dp"
         android:textAlignment="textEnd"

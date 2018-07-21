@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="44dp"
+        app:layout_constraintBottom_toBottomOf="@+id/contenedor"
+        app:layout_constraintEnd_toEndOf="@+id/contenedor"
+        app:layout_constraintStart_toStartOf="@+id/contenedor"
+        app:layout_constraintTop_toTopOf="@+id/contenedor"
+        app:srcCompat="@drawable/lido" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Lido Bar"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/contenedor"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/pastelitoView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:background="@android:color/holo_green_light"
+        android:text="Pastelito"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="@+id/contenedor"
+        app:layout_constraintStart_toStartOf="@+id/contenedor"
+        app:layout_constraintTop_toBottomOf="@+id/contenedor" />
+
+    <Button
+        android:id="@+id/bifeCaballoView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/holo_blue_bright"
+        android:text="Bife a Caballo"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="@+id/pastelitoView"
+        app:layout_constraintStart_toStartOf="@+id/pastelitoView"
+        app:layout_constraintTop_toBottomOf="@+id/pastelitoView" />
+
+    <Button
+        android:id="@+id/caldoPezcadoView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/holo_orange_dark"
+        android:text="Caldo de Pezcado"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/bifeCaballoView"
+        app:layout_constraintStart_toStartOf="@+id/bifeCaballoView"
+        app:layout_constraintTop_toBottomOf="@+id/bifeCaballoView" />
+</android.support.constraint.ConstraintLayout>
