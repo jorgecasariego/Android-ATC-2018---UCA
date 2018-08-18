@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_opcion1"
+            android:icon="@android:drawable/ic_menu_call"
+            android:title="Opción 1"/>
+
+        <item
+            android:id="@+id/menu_opcion2"
+            android:icon="@android:drawable/ic_btn_speak_now"
+            android:title="Opción 2"/>
+
+        <item
+            android:id="@+id/menu_opcion3"
+            android:icon="@android:drawable/ic_media_play"
+            android:title="Opción 3"/>
+
+        <item
+            android:id="@+id/menu_opcion4"
+            android:icon="@android:drawable/ic_menu_camera"
+            android:title="Opción 4"/>
+    </group>
+</menu>
