@@ -16,17 +16,27 @@ import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_peliculas.*
 import kotlinx.android.synthetic.main.movie_item.view.*
+import me.jorgecasariego.pororopeliculas.database.PeliculasDatabase
 import me.jorgecasariego.pororopeliculas.model.Model
 import me.jorgecasariego.pororopeliculas.network.MovieDbApi
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PeliculasActivity : AppCompatActivity() {
+class PeliculasActivity : AppCompatActivity(), PeliculaInterface {
+    override fun OnFavoritoClicked(pelicula: Model.Movie) {
+        val resultado = peliculasDatabase.insertarPeliculaFavorita(pelicula)
+
+        if (resultado) {
+            Toast.makeText(this, "Pelicula favorita guardada exitosamente", Toast.LENGTH_LONG).show()
+        }
+    }
 
     private  val movieDbApi by lazy {
         MovieDbApi.create()
     }
+
+    lateinit var peliculasDatabase: PeliculasDatabase
 
     companion object {
         val PAGE = 1
@@ -38,6 +48,8 @@ class PeliculasActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_peliculas)
+
+        peliculasDatabase = PeliculasDatabase(this)
 
         getPeliculas()
     }
@@ -63,7 +75,11 @@ class PeliculasActivity : AppCompatActivity() {
                     val adapter = GroupAdapter<ViewHolder>()
 
                     peliculas?.results?.forEach {
-                        adapter.add(MoviewItem(it, this@PeliculasActivity))
+                        adapter.add(
+                                MoviewItem(
+                                        it,
+                                        this@PeliculasActivity,
+                                        this@PeliculasActivity))
                     }
 
                     listado_peliculas.adapter = adapter
@@ -89,7 +105,15 @@ class PeliculasActivity : AppCompatActivity() {
     }
 }
 
-class MoviewItem(val pelicula: Model.Movie, val context: Context): Item<ViewHolder>() {
+interface PeliculaInterface {
+    fun OnFavoritoClicked(pelicula: Model.Movie)
+}
+
+class MoviewItem(
+        val pelicula: Model.Movie,
+        val context: Context,
+        val listener: PeliculaInterface): Item<ViewHolder>() {
+
     companion object {
         val imageUrlBase = "https://image.tmdb.org/t/p/w500"
     }
@@ -105,6 +129,14 @@ class MoviewItem(val pelicula: Model.Movie, val context: Context): Item<ViewHold
         Picasso.get().load(imageUrlBase + pelicula.poster_path)
                 .into(viewHolder.itemView.imagen_pelicula)
 
+        if (pelicula.es_favorito) {
+            viewHolder.itemView.favorito.setImageDrawable(
+                    ContextCompat.getDrawable(context, R.drawable.ic_favorite_red))
+        } else {
+            viewHolder.itemView.favorito.setImageDrawable(
+                    ContextCompat.getDrawable(context, R.drawable.ic_favorite_white))
+        }
+
         viewHolder.itemView.favorito.setOnClickListener {
             if (pelicula.es_favorito) {
                 viewHolder.itemView.favorito.setImageDrawable(
@@ -115,6 +147,8 @@ class MoviewItem(val pelicula: Model.Movie, val context: Context): Item<ViewHold
             }
 
             pelicula.es_favorito = !pelicula.es_favorito
+
+            listener.OnFavoritoClicked(pelicula)
         }
     }
 
